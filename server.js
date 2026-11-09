@@ -3,6 +3,7 @@ const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const express = require("express");
+const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const Database = require("better-sqlite3");
@@ -74,6 +75,12 @@ db.exec(`
 // ======================================
 // MIDDLEWARE
 // ======================================
+app.use(
+  cors({
+    origin: "https://cat-breed-explorer-jlzf.vercel.app",
+    credentials: true
+  })
+);
 
 app.use(express.json({ limit: "10mb" }));
 
@@ -84,7 +91,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       secure: process.env.NODE_ENV === "production",
       maxAge: 1000 * 60 * 60 * 24
     }
