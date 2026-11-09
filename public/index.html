@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f3ec">
+
+  <title>Cat Breed Explorer | สำรวจโลกของสายพันธุ์แมว</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="page-shell">
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Cat Breed Explorer home">
+      <span class="brand-icon">🐾</span>
+      <span>
+        <b>CAT</b>
+        <small>BREED EXPLORER</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="#explore">สำรวจสายพันธุ์</a>
+      <a href="#scanner">AI Scanner</a>
+      <a href="#myPets">แมวของฉัน</a>
+      <a href="#reminders">แจ้งเตือนการดูแล</a>
+      <a href="#history">ประวัติการสแกน</a>
+      <a href="#login">เข้าสู่ระบบ</a>
+
+      <button id="favoritesNav" class="nav-fav" type="button">
+        ♡ รายการโปรด <span id="favoriteCount">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- LOGIN / REGISTER -->
+  <section id="login" class="auth-section">
+    <div class="auth-container">
+
+      <div class="auth-header">
+        <div class="cat-photo-container">
+          <img
+            id="loginCatImage"
+            src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg"
+            alt="รูปแมวน่ารัก"
+          >
+          <span class="cat-photo-label">🐾 Cat Care</span>
+        </div>
+
+        <h2>ยินดีต้อนรับคนรักแมว</h2>
+        <p>
+          ดูแลเจ้าเหมียวของคุณ<br>
+          ให้มีความสุขและสุขภาพดีทุกวัน
+        </p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="loginTab" class="auth-tab active" type="button">
+          เข้าสู่ระบบ
+        </button>
+
+        <button id="registerTab" class="auth-tab" type="button">
+          สมัครสมาชิก
+        </button>
+      </div>
+
+      <form id="loginForm">
+        <label for="loginEmail">อีเมล</label>
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="กรอกอีเมล"
+          autocomplete="email"
+          required
+        >
+
+        <label for="loginPassword">รหัสผ่าน</label>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="กรอกรหัสผ่าน"
+          autocomplete="current-password"
+          required
+        >
+
+        <button type="submit" class="auth-submit">
+          เข้าสู่ระบบ
+        </button>
+      </form>
+
+      <form id="registerForm" hidden>
+        <label for="registerName">ชื่อผู้ใช้งาน</label>
+        <input
+          id="registerName"
+          type="text"
+          placeholder="กรอกชื่อของคุณ"
+          minlength="3"
+          maxlength="20"
+          required
+        >
+
+        <label for="registerEmail">อีเมล</label>
+        <input
+          id="registerEmail"
+          type="email"
+          placeholder="กรอกอีเมล"
+          autocomplete="email"
+          required
+        >
+
+        <label for="registerPassword">รหัสผ่าน</label>
+        <input
+          id="registerPassword"
+          type="password"
+          minlength="8"
+          placeholder="ตั้งรหัสผ่านอย่างน้อย 8 ตัว"
+          autocomplete="new-password"
+          required
+        >
+
+        <button type="submit" class="auth-submit">
+          สมัครสมาชิก
+        </button>
+      </form>
+
+      <p id="authMessage" aria-live="polite"></p>
+
+      <p id="welcomeMessage" hidden>
+        🐱 ยินดีต้อนรับกลับมา!
+      </p>
+
+      <button id="logoutButton" type="button" hidden>
+        ออกจากระบบ
+      </button>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span></span> YOUR LITTLE CAT ENCYCLOPEDIA
+        </p>
+
+        <h1>
+          โลกของแมว<br>
+          <em>น่ารักกว่าที่เคย</em>
+        </h1>
+
+        <p class="hero-description">
+          ค้นพบสายพันธุ์แมวที่ใช่สำหรับคุณ
+          พร้อมเรื่องราว นิสัย และข้อมูลน่ารู้ของเจ้าเหมียวจากทั่วโลก
+        </p>
+
+        <a class="primary-button" href="#explore">
+          เริ่มสำรวจ <span>↗</span>
+        </a>
+
+        <div class="hero-note">
+          <span>✦</span> ข้อมูลสายพันธุ์จาก TheCatAPI
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-blob"></div>
+        <div class="hero-sticker sticker-one">MEOW!</div>
+        <div class="hero-sticker sticker-two">♡</div>
+
+        <img
+          src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg"
+          alt="แมวตัวอย่าง"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="hero-caption">
+          <span>✦</span>
+          <div>
+            <b>Find your purr-fect match</b>
+            <small>Discover • Learn • Love</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-row">
+      <div>
+        <strong id="breedTotal">—</strong>
+        <span>สายพันธุ์ที่ค้นพบ</span>
+      </div>
+
+      <div>
+        <strong id="favoriteTotal">0</strong>
+        <span>สายพันธุ์ที่คุณชอบ</span>
+      </div>
+
+      <div>
+        <strong>∞</strong>
+        <span>เรื่องราวของเจ้าเหมียว</span>
+      </div>
+    </section>
+
+    <!-- EXPLORE BREEDS -->
+    <section id="explore" class="explore-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MEET THE BREEDS</p>
+          <h2>ค้นพบสายพันธุ์แมว <span>🐱</span></h2>
+          <p>แต่ละสายพันธุ์มีเสน่ห์และบุคลิกที่แตกต่างกัน</p>
+        </div>
+
+        <button id="showAllBtn" class="text-button" type="button">
+          ดูทั้งหมด <span>→</span>
+        </button>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box">
+          <span>⌕</span>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="ค้นหาชื่อสายพันธุ์แมว..."
+            autocomplete="off"
+          >
+          <kbd>⌘ K</kbd>
+        </label>
+
+        <div class="toolbar-controls">
+          <select id="originFilter" aria-label="กรองตามประเทศ">
+            <option value="">ทุกประเทศต้นกำเนิด</option>
+          </select>
+
+          <select id="sortSelect" aria-label="เรียงข้อมูล">
+            <option value="az">ชื่อ A – Z</option>
+            <option value="za">ชื่อ Z – A</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="loadingState" class="state-card">
+        <div class="loader-cat">🐈</div>
+        <h3>กำลังตามหาเจ้าเหมียว...</h3>
+        <p>กำลังโหลดข้อมูลสายพันธุ์แมวจาก TheCatAPI</p>
+      </div>
+
+      <div id="errorState" class="state-card error-state hidden">
+        <div class="state-icon">😿</div>
+        <h3>เหมียว! โหลดข้อมูลไม่สำเร็จ</h3>
+        <p id="errorMessage">
+          กรุณาตรวจสอบ API Key หรือการเชื่อมต่ออินเทอร์เน็ต
+        </p>
+        <button id="retryBtn" class="primary-button" type="button">
+          ลองอีกครั้ง ↻
+        </button>
+      </div>
+
+      <div id="emptyState" class="empty-state hidden">
+        <span>🐾</span>
+        <h3>ยังไม่เจอสายพันธุ์นี้</h3>
+        <p>ลองค้นหาด้วยคำอื่น หรือเปลี่ยนตัวกรองดูนะ</p>
+      </div>
+
+      <div id="breedGrid" class="breed-grid"></div>
+
+      <div class="results-footer">
+        <span id="resultsLabel">กำลังโหลด...</span>
+        <span>Made with <b>♡</b> for cat lovers</span>
+      </div>
+    </section>
+
+    <!-- AI SCANNER -->
+    <section id="scanner" class="feature-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SMART CAT SCANNER</p>
+          <h2>AI Scanner <span>📸</span></h2>
+          <p>อัปโหลดรูปภาพแมวเพื่อเตรียมตรวจสอบสายพันธุ์</p>
+        </div>
+      </div>
+
+      <div class="feature-panel scanner-panel">
+        <div class="scanner-intro">
+          <div class="feature-icon">🔍</div>
+          <h3>ค้นหาสายพันธุ์จากรูปภาพ</h3>
+          <p>
+            เลือกรูปภาพแมวจากอุปกรณ์ของคุณ
+            จากนั้นสามารถเตรียมข้อมูลเพื่อบันทึกประวัติได้
+          </p>
+        </div>
+
+        <form id="scannerForm">
+          <label for="scanImage" class="upload-area">
+            <span class="upload-icon">🐱</span>
+            <strong>คลิกเพื่อเลือกรูปภาพแมว</strong>
+            <small>รองรับไฟล์ JPG, PNG และ WEBP</small>
+            <input
+              id="scanImage"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+            >
+          </label>
+
+          <div id="scanPreviewWrap" class="scan-preview-wrap" hidden>
+            <img id="scanPreview" src="" alt="รูปแมวที่เลือก">
+            <button id="removeScanImage" type="button">
+              ลบรูปภาพ
+            </button>
+          </div>
+
+          <label for="scanPetSelect">บันทึกผลให้กับสัตว์เลี้ยง</label>
+          <select id="scanPetSelect">
+            <option value="">ไม่ระบุสัตว์เลี้ยง</option>
+          </select>
+
+          <label for="scanBreedName">ชื่อสายพันธุ์ (ถ้าทราบ)</label>
+          <input
+            id="scanBreedName"
+            type="text"
+            placeholder="กรอกชื่อสายพันธุ์ หรือเว้นว่างไว้"
+          >
+
+          <p class="scanner-notice">
+            หมายเหตุ: ระบบนี้ยังไม่ได้เชื่อมต่อโมเดล AI สำหรับทำนายสายพันธุ์จริง
+            จึงยังไม่สามารถวิเคราะห์รูปภาพโดยอัตโนมัติได้
+          </p>
+
+          <button id="saveScanButton" class="primary-button" type="submit">
+            บันทึกข้อมูลการสแกน
+          </button>
+        </form>
+
+        <p id="scanMessage" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- MY PETS -->
+    <section id="myPets" class="feature-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MY LITTLE FAMILY</p>
+          <h2>แมวของฉัน <span>🐾</span></h2>
+          <p>จัดเก็บข้อมูลและรายละเอียดของสัตว์เลี้ยงแต่ละตัว</p>
+        </div>
+      </div>
+
+      <div class="feature-panel">
+        <div class="feature-intro">
+          <div class="feature-icon">🐈</div>
+          <h3>เพิ่มสมาชิกใหม่ในครอบครัว</h3>
+          <p>บันทึกข้อมูลเจ้าเหมียวของคุณไว้ในบัญชีส่วนตัว</p>
+        </div>
+
+        <form id="petForm" class="feature-form">
+          <input id="petId" type="hidden">
+
+          <label for="petName">ชื่อสัตว์เลี้ยง *</label>
+          <input
+            id="petName"
+            type="text"
+            placeholder="เช่น มะลิ"
+            required
+          >
+
+          <label for="petSpecies">ประเภทสัตว์</label>
+          <select id="petSpecies">
+            <option value="Cat">แมว</option>
+            <option value="Other">อื่น ๆ</option>
+          </select>
+
+          <label for="petBreed">สายพันธุ์</label>
+          <input
+            id="petBreed"
+            type="text"
+            placeholder="เช่น Persian, British Shorthair"
+          >
+
+          <label for="petBirthDate">วันเกิด</label>
+          <input id="petBirthDate" type="date">
+
+          <label for="petGender">เพศ</label>
+          <select id="petGender">
+            <option value="">ไม่ระบุ</option>
+            <option value="Male">ผู้</option>
+            <option value="Female">เมีย</option>
+          </select>
+
+          <label for="petImageUrl">ลิงก์รูปภาพ</label>
+          <input
+            id="petImageUrl"
+            type="url"
+            placeholder="https://example.com/cat.jpg"
+          >
+
+          <label for="petNotes">รายละเอียดเพิ่มเติม</label>
+          <textarea
+            id="petNotes"
+            rows="3"
+            placeholder="นิสัย อาหารที่ชอบ หรือข้อมูลอื่น ๆ"
+          ></textarea>
+
+          <div class="form-actions">
+            <button id="savePetButton" class="primary-button" type="submit">
+              เพิ่มข้อมูลสัตว์เลี้ยง
+            </button>
+
+            <button id="cancelPetEdit" class="secondary-button" type="button" hidden>
+              ยกเลิก
+            </button>
+          </div>
+        </form>
+
+        <p id="petMessage" aria-live="polite"></p>
+      </div>
+
+      <div class="feature-list-heading">
+        <h3>สมาชิกของฉัน</h3>
+        <span id="petCount">0 ตัว</span>
+      </div>
+
+      <div id="petsLoading" class="state-card hidden">
+        <p>กำลังโหลดข้อมูลสัตว์เลี้ยง...</p>
+      </div>
+
+      <div id="petsEmpty" class="empty-state">
+        <span>🐾</span>
+        <h3>ยังไม่มีข้อมูลสัตว์เลี้ยง</h3>
+        <p>เพิ่มข้อมูลเจ้าเหมียวของคุณได้จากแบบฟอร์มด้านบน</p>
+      </div>
+
+      <div id="petsGrid" class="pets-grid"></div>
+    </section>
+
+    <!-- PET CARE REMINDERS -->
+    <section id="reminders" class="feature-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">CARE EVERY DAY</p>
+          <h2>แจ้งเตือนการดูแล <span>🔔</span></h2>
+          <p>วางแผนการดูแลสัตว์เลี้ยง ไม่พลาดกิจกรรมสำคัญ</p>
+        </div>
+      </div>
+
+      <div class="feature-panel">
+        <div class="feature-intro">
+          <div class="feature-icon">🗓️</div>
+          <h3>สร้างรายการแจ้งเตือน</h3>
+          <p>บันทึกวันนัดหมายและกิจกรรมดูแลสัตว์เลี้ยง</p>
+        </div>
+
+        <form id="reminderForm" class="feature-form">
+          <label for="reminderPet">เลือกสัตว์เลี้ยง</label>
+          <select id="reminderPet">
+            <option value="">ไม่ระบุสัตว์เลี้ยง</option>
+          </select>
+
+          <label for="reminderTitle">หัวข้อการแจ้งเตือน *</label>
+          <input
+            id="reminderTitle"
+            type="text"
+            placeholder="เช่น ฉีดวัคซีน"
+            required
+          >
+
+          <label for="reminderDescription">รายละเอียด</label>
+          <textarea
+            id="reminderDescription"
+            rows="2"
+            placeholder="รายละเอียดเพิ่มเติม"
+          ></textarea>
+
+          <label for="reminderDueAt">วันและเวลา *</label>
+          <input id="reminderDueAt" type="datetime-local" required>
+
+          <label for="reminderRepeat">การแจ้งเตือนซ้ำ</label>
+          <select id="reminderRepeat">
+            <option value="none">ไม่ซ้ำ</option>
+            <option value="daily">ทุกวัน</option>
+            <option value="weekly">ทุกสัปดาห์</option>
+            <option value="monthly">ทุกเดือน</option>
+          </select>
+
+          <button id="saveReminderButton" class="primary-button" type="submit">
+            เพิ่มการแจ้งเตือน
+          </button>
+        </form>
+
+        <p id="reminderMessage" aria-live="polite"></p>
+      </div>
+
+      <div class="feature-list-heading">
+        <h3>รายการแจ้งเตือนของฉัน</h3>
+        <span id="reminderCount">0 รายการ</span>
+      </div>
+
+      <div id="remindersEmpty" class="empty-state">
+        <span>🌷</span>
+        <h3>ยังไม่มีการแจ้งเตือน</h3>
+        <p>เพิ่มกิจกรรมดูแลเจ้าเหมียวได้จากแบบฟอร์มด้านบน</p>
+      </div>
+
+      <div id="remindersList" class="reminders-list"></div>
+    </section>
+
+    <!-- SCAN HISTORY -->
+    <section id="history" class="feature-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR SCAN JOURNEY</p>
+          <h2>ประวัติการสแกน <span>📋</span></h2>
+          <p>ดูข้อมูลการสแกนที่บันทึกไว้ในบัญชีของคุณ</p>
+        </div>
+      </div>
+
+      <div class="feature-panel history-panel">
+        <div class="feature-list-heading">
+          <h3>รายการที่บันทึกไว้</h3>
+          <span id="historyCount">0 รายการ</span>
+        </div>
+
+        <div id="historyEmpty" class="empty-state">
+          <span>🐾</span>
+          <h3>ยังไม่มีประวัติการสแกน</h3>
+          <p>เมื่อบันทึกข้อมูลจาก AI Scanner รายการจะแสดงที่นี่</p>
+        </div>
+
+        <div id="historyList" class="history-list"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT API -->
+    <section class="about-strip">
+      <div class="about-icon">📚</div>
+
+      <div>
+        <p class="eyebrow">CAT FACTS, REAL SOURCES</p>
+        <h3>เรียนรู้เรื่องแมวจากข้อมูลจริง</h3>
+        <p>
+          ข้อมูลสายพันธุ์ดึงจาก TheCatAPI โดยตรง
+          ข้อมูลบางรายการอาจไม่มีในทุกสายพันธุ์
+        </p>
+      </div>
+
+      <a href="https://thecatapi.com/" target="_blank" rel="noopener noreferrer">
+        เกี่ยวกับ TheCatAPI ↗
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="brand footer-brand" href="#">
+      <span class="brand-icon">🐾</span>
+      <span>
+        <b>CAT</b>
+        <small>BREED EXPLORER</small>
+      </span>
+    </a>
+
+    <p>Made for cat lovers, one breed at a time.</p>
+    <span>API: TheCatAPI</span>
+  </footer>
+
+</div>
+
+<!-- BREED DETAIL MODAL -->
+<div
+  id="breedModal"
+  class="modal hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modalBreedName"
+>
+  <div class="modal-backdrop" data-close-modal></div>
+
+  <article class="modal-panel">
+    <button
+      class="modal-close"
+      id="modalClose"
+      type="button"
+      aria-label="ปิดหน้าต่าง"
+    >
+      ×
+    </button>
+
+    <div class="modal-image-wrap">
+      <img id="modalImage" src="" alt="">
+      <div class="modal-image-shade"></div>
+      <span class="modal-photo-label">BREED SPOTLIGHT</span>
+
+      <button
+        id="modalFavorite"
+        class="modal-heart"
+        type="button"
+        aria-label="บันทึกสายพันธุ์โปรด"
+      >
+        ♡
+      </button>
+    </div>
+
+    <div class="modal-content">
+      <p class="eyebrow" id="modalOrigin">CAT BREED</p>
+      <h2 id="modalBreedName">Breed name</h2>
+      <p id="modalTemperament" class="temperament"></p>
+      <p id="modalDescription" class="modal-description"></p>
+
+      <div class="detail-grid">
+        <div class="detail-tile">
+          <span>⚖️</span>
+          <small>น้ำหนัก</small>
+          <strong id="modalWeight">ไม่มีข้อมูล</strong>
+        </div>
+
+        <div class="detail-tile">
+          <span>🎂</span>
+          <small>อายุขัย</small>
+          <strong id="modalLife">ไม่มีข้อมูล</strong>
+        </div>
+
+        <div class="detail-tile">
+          <span>🌍</span>
+          <small>ต้นกำเนิด</small>
+          <strong id="modalCountry">ไม่มีข้อมูล</strong>
+        </div>
+
+        <div class="detail-tile">
+          <span>🧬</span>
+          <small>ชื่อเรียก</small>
+          <strong id="modalAltName">ไม่มีข้อมูล</strong>
+        </div>
+      </div>
+
+      <div class="traits-section">
+        <h3>บุคลิกของเจ้าเหมียว <span>✦</span></h3>
+        <div id="traitTags" class="trait-tags"></div>
+      </div>
+
+      <div class="modal-footer">
+        <span>
+          ข้อมูลจาก
+          <a href="https://thecatapi.com/" target="_blank" rel="noopener noreferrer">
+            TheCatAPI
+          </a>
+        </span>
+
+        <button
+          id="modalFavoriteBottom"
+          class="secondary-button"
+          type="button"
+        >
+          ♡ เพิ่มในรายการโปรด
+        </button>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- JAVASCRIPT -->
+<script src="dashboard.js"></script>
+
+</body>
+</html>

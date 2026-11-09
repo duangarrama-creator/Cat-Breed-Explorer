@@ -1,0 +1,15 @@
+node_modules/
+.env
+.DS_Store
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Build output
+client/dist/
+
+# Deployment settings
+.vercel/
+client/src/App.backup.jsx
