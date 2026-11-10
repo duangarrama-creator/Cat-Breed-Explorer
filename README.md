@@ -1,71 +1,89 @@
 # Cat Breed Explorer & Cat Care 🐱
+### เว็บไซต์สำรวจสายพันธุ์แมวและระบบช่วยดูแลแมว
 
-A web application for exploring cat breeds and managing cat care information.
+## 1. เกี่ยวกับโครงงาน
 
-## Project Overview
+Cat Breed Explorer & Cat Care เป็นเว็บไซต์ที่พัฒนาด้วย React และ Express เพื่อให้ผู้ใช้งานสามารถค้นหาข้อมูลสายพันธุ์แมว ดูรายละเอียดของแมวแต่ละสายพันธุ์ และจัดการข้อมูลการดูแลแมวของตนเองได้ภายในเว็บไซต์เดียว
 
-This application uses TheCatAPI to retrieve cat breed information and images.
+โครงงานนี้เชื่อมต่อกับ TheCatAPI เพื่อดึงข้อมูลสายพันธุ์แมวและรูปภาพ พร้อมพัฒนาระบบสมาชิกและฐานข้อมูลเพื่อรองรับการใช้งานส่วนบุคคล
 
-### Main Features
-- Explore cat breeds and view breed details.
-- Search and sort breeds alphabetically.
-- Save favorite cat breeds.
-- Register and log in.
-- Manage personal cat profiles.
-- Create cat care reminders.
-- View scan history.
+## 2. ลิงก์ของโครงงาน
 
-**AI Scanner:** The scanner is currently a prototype. A real AI image-classification model has not yet been integrated.
+- **เว็บไซต์:** https://cat-breed-explorer-new.vercel.app
+- **GitHub Repository:** https://github.com/duangarrama-creator/Cat-Breed-Explorer
+- **Backend API:** https://cat-breed-explorer-api-tj51.onrender.com
 
-## Technologies
+## 3. ความสามารถของระบบ
 
-- React and Vite
-- JavaScript and CSS
-- Node.js and Express
-- SQLite and better-sqlite3
-- bcryptjs and express-session
-- TheCatAPI
+1. **สำรวจสายพันธุ์แมว** — แสดงข้อมูลสายพันธุ์แมวจาก TheCatAPI
+2. **ค้นหาและเรียงลำดับข้อมูล** — ค้นหาสายพันธุ์แมวและเรียงลำดับตามชื่อ
+3. **รายละเอียดสายพันธุ์แมว** — แสดงข้อมูล เช่น ถิ่นกำเนิด ลักษณะนิสัย อายุขัย และรูปภาพ
+4. **รายการโปรด** — บันทึกสายพันธุ์แมวที่สนใจ
+5. **ระบบสมาชิก** — สมัครสมาชิก เข้าสู่ระบบ และออกจากระบบ
+6. **แมวของฉัน (My Pets)** — เพิ่มและจัดการข้อมูลแมวของผู้ใช้งาน
+7. **ระบบแจ้งเตือนการดูแลแมว** — จัดการรายการแจ้งเตือนสำหรับการดูแลแมว
+8. **ประวัติการสแกน** — บันทึกและเรียกดูประวัติการสแกน
+9. **AI Scanner** — ส่วนติดต่อสำหรับทดลองอัปโหลดรูปภาพแมว โดยปัจจุบันยังไม่ได้เชื่อมต่อโมเดล AI สำหรับทำนายสายพันธุ์จริง
 
-## Installation
+## 4. เทคโนโลยีที่ใช้
 
-### 1. Requirements
-- Node.js and npm
-- TheCatAPI API key
+| เทคโนโลยี | การนำมาใช้งาน |
+|---|---|
+| React | พัฒนาส่วนติดต่อผู้ใช้งาน |
+| Vite | จัดการและสร้างโปรเจกต์ Frontend |
+| JavaScript | พัฒนาการทำงานของเว็บไซต์ |
+| CSS | ออกแบบและตกแต่งเว็บไซต์ |
+| Node.js | ใช้ทำงานฝั่ง Server |
+| Express.js | พัฒนา Backend และ REST API |
+| SQLite | จัดเก็บข้อมูล |
+| better-sqlite3 | เชื่อมต่อและจัดการฐานข้อมูล SQLite |
+| bcryptjs | เข้ารหัสรหัสผ่าน |
+| express-session | จัดการ Session ของผู้ใช้งาน |
+| TheCatAPI | ดึงข้อมูลและรูปภาพสายพันธุ์แมว |
+| Vercel | เผยแพร่เว็บไซต์ Frontend |
+| Render | เผยแพร่ Backend API |
 
-### 2. Install backend dependencies
+## 5. วิธีติดตั้งและเปิดใช้งาน
 
-From the project root:
+### 5.1 ดาวน์โหลดโปรเจกต์
+
+```bash
+git clone https://github.com/duangarrama-creator/Cat-Breed-Explorer.git
+cd Cat-Breed-Explorer
+```
+
+### 5.2 ติดตั้ง Dependencies ของ Backend
 
 ```bash
 npm install
 ```
 
-### 3. Configure environment variables
+### 5.3 ตั้งค่า API Key
+
+สร้างไฟล์ `.env` จากไฟล์ตัวอย่าง
 
 ```bash
 cp .env.example .env
 ```
 
-Add your own key to `.env`:
+เปิดไฟล์ `.env` และกำหนดค่าของตนเอง
 
 ```env
 THECATAPI_KEY=YOUR_REAL_API_KEY
 PORT=3000
 ```
 
-Never upload `.env` to GitHub.
+หมายเหตุ: ผู้ใช้งานต้องใส่ API Key ของ TheCatAPI ด้วยตนเอง และไม่ควรเผยแพร่ไฟล์ `.env` หรือ API Key ลงใน GitHub
 
-### 4. Start the backend
+### 5.4 เปิดใช้งาน Backend
 
 ```bash
 npm start
 ```
 
-Backend: `http://localhost:3000`
+### 5.5 เปิดใช้งาน Frontend
 
-### 5. Start the frontend
-
-Open another Terminal window:
+เปิด Terminal อีกหน้าต่างหนึ่ง แล้วใช้คำสั่ง
 
 ```bash
 cd client
@@ -73,73 +91,116 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL shown in the Terminal, normally `http://localhost:5173`.
+จากนั้นเปิดเว็บไซต์ตาม URL ที่ Vite แสดงใน Terminal
 
-Keep both servers running.
+## 6. API ที่ใช้งาน
 
-## API Verification
+| Endpoint | รายละเอียด |
+|---|---|
+| `/api/status` | ตรวจสอบสถานะของระบบ |
+| `/api/breeds` | ดึงข้อมูลสายพันธุ์แมว |
+| `/api/breeds/:id/image` | ดึงรูปภาพที่ตรงกับสายพันธุ์แมว |
+| `/api/auth/register` | สมัครสมาชิก |
+| `/api/auth/login` | เข้าสู่ระบบ |
+| `/api/auth/me` | ตรวจสอบข้อมูลผู้ใช้งานปัจจุบัน |
+| `/api/pets` | จัดการข้อมูลแมวของผู้ใช้งาน |
 
-- Backend status: `http://localhost:3000/api/status`
-- Cat breeds: `http://localhost:3000/api/breeds`
+## 7. โครงสร้างส่วนประกอบของระบบ
 
-## React Components
+ส่วนประกอบหลักของเว็บไซต์พัฒนาด้วย React ได้แก่
 
-The frontend is separated into reusable components:
+- `AppHeader` — ส่วนหัวและเมนูนำทาง
+- `HeroSection` — ส่วนแนะนำเว็บไซต์
+- `MainTabs` — เมนูแบ่งหมวดหมู่การใช้งาน
+- `BreedSection` — ส่วนแสดงข้อมูลสายพันธุ์แมว
+- `BreedDetailModal` — หน้าต่างแสดงรายละเอียดสายพันธุ์แมว
+- `PetsSection` — ส่วนจัดการข้อมูลแมวของผู้ใช้งาน
+- `RemindersSection` — ส่วนจัดการการแจ้งเตือน
+- `HistorySection` — ส่วนแสดงประวัติการสแกน
 
-- AppHeader
-- HeroSection
-- MainTabs
-- MessageBanner
-- LoginRequired
-- BreedSection
-- BreedDetailModal
-- PetsSection
-- RemindersSection
-- HistorySection
-- ReminderAlertModal
+## 8. โครงสร้างข้อมูลและฐานข้อมูล
 
-## Data Structures and Algorithms
+ระบบใช้ SQLite ในการจัดเก็บข้อมูล โดยมีข้อมูลหลัก ได้แก่
 
-### Insertion Sort
+- ข้อมูลสมาชิกและบัญชีผู้ใช้งาน
+- ข้อมูลแมวของผู้ใช้งาน
+- ข้อมูลประวัติการสแกน
+- ข้อมูลการแจ้งเตือนการดูแลแมว
 
-Used to sort breed names from A–Z and Z–A.
+รหัสผ่านของผู้ใช้งานถูกเข้ารหัสด้วย bcryptjs ก่อนจัดเก็บลงฐานข้อมูล
 
-- Best case: O(n)
-- Average case: O(n²)
-- Worst case: O(n²)
-- Space: O(n), because the implementation copies the array.
+## 9. โครงสร้างข้อมูลและอัลกอริทึม (DSA)
 
-Implementation: `insertionSort()` in `client/src/App.jsx`.
+### 9.1 Insertion Sort
 
-### Hash Table using Map
+ใช้ Insertion Sort สำหรับเรียงลำดับข้อมูลสายพันธุ์แมวตามชื่อจาก A-Z และ Z-A โดยเขียนอัลกอริทึมขึ้นมาใช้งานเอง แทนการใช้ `.sort()` ของ JavaScript
 
-Stores breed objects using breed IDs as keys.
+| กรณี | Time Complexity |
+|---|---|
+| Best Case | O(n) |
+| Average Case | O(n²) |
+| Worst Case | O(n²) |
 
-- Creation: O(n)
-- Average lookup: O(1)
-- Space: O(n)
+### 9.2 Hash Table
 
-Implementation: `breedHashTable` and `openBreed()` in `client/src/App.jsx`.
+ใช้ JavaScript Map เพื่อจัดเก็บข้อมูลสายพันธุ์แมว โดยใช้รหัสสายพันธุ์แมว (Breed ID) เป็น Key เพื่อให้สามารถค้นหาข้อมูลสายพันธุ์ที่ต้องการได้อย่างรวดเร็ว
 
-## Database
+| การทำงาน | Complexity |
+|---|---|
+| การสร้าง Hash Table | O(n) |
+| การค้นหาโดยเฉลี่ย | O(1) |
+| พื้นที่จัดเก็บ | O(n) |
 
-SQLite stores user accounts, pets, scan history, and reminders. Passwords are hashed using bcryptjs.
+## 10. การทดสอบระบบ
 
-## Production Build
+มีการตรวจสอบการทำงานของระบบในส่วนต่าง ๆ ได้แก่
 
-```bash
-cd client
-npm run build
-```
+- การเชื่อมต่อ Backend และ Frontend
+- การดึงข้อมูลสายพันธุ์แมวจาก TheCatAPI
+- การแสดงข้อมูลและรูปภาพของสายพันธุ์แมว
+- การค้นหาและเรียงลำดับข้อมูล
+- การสมัครสมาชิกและเข้าสู่ระบบ
+- การจัดการข้อมูลแมว
+- การตรวจสอบการสร้าง Production Build
 
-Build output: `client/dist/`.
+## 11. ข้อจำกัดของระบบ
 
-## Limitations
+- AI Scanner ยังไม่ได้เชื่อมต่อโมเดล AI สำหรับวิเคราะห์สายพันธุ์แมวจริง
+- บางสายพันธุ์อาจไม่มีรูปภาพที่ยืนยันได้จาก TheCatAPI ระบบจึงแสดงรูปภาพสำรองแทน เพื่อป้องกันการแสดงรูปแมวผิดสายพันธุ์
+- การใช้งาน API ต้องมี API Key ที่ถูกต้อง
+- การใช้งานฐานข้อมูลบนระบบ Hosting ต้องคำนึงถึงการจัดเก็บข้อมูลถาวรและการสำรองข้อมูล
 
-- The scanner does not yet use a real AI classification model.
-- A valid TheCatAPI key is required.
-- Production deployment requires backend hosting and persistent database storage.
+## 12. ตารางแบ่งหน้าที่และการมีส่วนร่วมของสมาชิก (Contribution Table)
 
-## Project Documentation
+สมาชิกทั้งสองคนมีส่วนร่วมในการพัฒนาโครงงาน โดยแบ่งความรับผิดชอบในสัดส่วนที่เท่าเทียมกัน คนละ 50%
 
-See [DECISION_LOG.md](DECISION_LOG.md) for technical and design decisions.
+| สมาชิก | หน้าที่และความรับผิดชอบ | สัดส่วน |
+|---|---|---:|
+| น.ส. อรัญญา ดวงอาราม | พัฒนาส่วน Frontend ด้วย React ออกแบบหน้าตาและประสบการณ์การใช้งาน พัฒนาส่วนแสดงข้อมูลและรายละเอียดสายพันธุ์แมว ระบบค้นหา รายการโปรด และส่วนติดต่อของ My Pets และ AI Scanner | 50% |
+| นาย ชูยศ กิตติวัฒนโชติ | พัฒนาส่วน Backend ด้วย Node.js และ Express เชื่อมต่อ TheCatAPI จัดการฐานข้อมูล SQLite พัฒนาระบบสมัครสมาชิก เข้าสู่ระบบ และระบบจัดการข้อมูลการแจ้งเตือนและประวัติการสแกน | 50% |
+
+**งานที่ทั้งสองคนร่วมกันรับผิดชอบ**
+- ทดสอบการทำงานของระบบโดยรวม
+- ตรวจสอบและแก้ไขข้อผิดพลาด
+- เชื่อมต่อการทำงานระหว่าง Frontend และ Backend
+- จัดทำเอกสารประกอบโครงงาน
+- เตรียมการสาธิตและนำเสนอผลงาน
+
+## 13. ตารางข้อเสนอแนะในการพัฒนาต่อยอด (Recommendation Table)
+
+| หัวข้อ | ข้อเสนอแนะ |
+|---|---|
+| AI Scanner | พัฒนาและเชื่อมต่อโมเดล AI เพื่อให้สามารถวิเคราะห์สายพันธุ์แมวจากรูปภาพได้จริง |
+| ข้อมูลสายพันธุ์แมว | เพิ่มแหล่งข้อมูลและรูปภาพที่ครอบคลุมสายพันธุ์แมวมากขึ้น |
+| User Experience | ปรับปรุงการแสดงผลให้รองรับโทรศัพท์มือถือและแท็บเล็ตได้ดียิ่งขึ้น |
+| ระบบแจ้งเตือน | เพิ่มตัวเลือกการแจ้งเตือนตามช่วงเวลาและประเภทกิจกรรม |
+| ฐานข้อมูล | เพิ่มระบบสำรองข้อมูลและการกู้คืนข้อมูล |
+| ความปลอดภัย | พัฒนาระบบรักษาความปลอดภัยและการจัดการข้อมูลผู้ใช้งานให้ดียิ่งขึ้น |
+| ฟังก์ชันเพิ่มเติม | เพิ่มข้อมูลสุขภาพและประวัติการดูแลแมวในระยะยาว |
+
+---
+
+**โครงงาน Cat Breed Explorer & Cat Care**  
+จัดทำโดย  
+1. น.ส. อรัญญา ดวงอาราม  
+2. นาย ชูยศ กิตติวัฒนโชติ
