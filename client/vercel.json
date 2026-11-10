@@ -1,0 +1,10 @@
+
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://cat-breed-explorer-api-tj51.onrender.com/api/$1"
+    }
+  ]
+}
+
