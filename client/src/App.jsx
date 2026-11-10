@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
   getBreeds,
+  getBreedImage,
   getServerStatus,
 } from './services/api'
 import AppHeader from './components/AppHeader'
@@ -19,7 +20,7 @@ import './App.css'
 const API_BASE = '/api'
 const FAVORITES_KEY = 'catBreedFavorites'
 const FALLBACK_CAT_IMAGE =
-  'https://cdn2.thecatapi.com/images/KWdLHmOqc.jpg'
+  'https://placehold.co/600x400/f4eee5/806b59?text=No+Breed+Photo'
 
 function readFavorites() {
   try {
@@ -116,8 +117,44 @@ function App() {
       setLoading(true)
       setError('')
 
-      const data = await getBreeds()
-      setBreeds(Array.isArray(data) ? data : [])
+            const data = await getBreeds()
+
+      const breedList = Array.isArray(data) ? data : []
+
+      // แสดงข้อมูลสายพันธุ์ก่อน
+      setBreeds(breedList)
+
+      // ค้นหารูปเพิ่มเติมเฉพาะสายพันธุ์ที่ยังไม่มีรูป
+      const breedsWithoutImages = breedList.filter(
+        (breed) => !breed.image?.url && breed.id
+      )
+
+      // จำกัดการค้นหาครั้งละ 5 สายพันธุ์
+      for (let i = 0; i < breedsWithoutImages.length; i += 5) {
+        const batch = breedsWithoutImages.slice(i, i + 5)
+
+        const imageResults = await Promise.all(
+          batch.map(async (breed) => ({
+            id: breed.id,
+            url: await getBreedImage(breed.id),
+          }))
+        )
+
+        setBreeds((currentBreeds) =>
+          currentBreeds.map((breed) => {
+            const result = imageResults.find(
+              (item) => item.id === breed.id
+            )
+
+            if (!result?.url) return breed
+
+            return {
+              ...breed,
+              image: { url: result.url },
+            }
+          })
+        )
+      }
     } catch (err) {
       setError(err.message || 'โหลดข้อมูลแมวไม่สำเร็จ')
     } finally {

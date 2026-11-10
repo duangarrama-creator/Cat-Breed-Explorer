@@ -857,33 +857,29 @@ app.get("/api/breeds", async (req, res) => {
   }
 });
 
+
 // ======================================
 // BREED IMAGE API
 // ======================================
 
 app.get("/api/breeds/:id/image", async (req, res) => {
   try {
-    const breedId = encodeURIComponent(req.params.id);
+    const breedId = req.params.id;
 
-    // ค้นหารูปเฉพาะสายพันธุ์ก่อน
-    let images = await theCatApi(
-      `${API_BASE}/images/search?breed_ids=${breedId}&limit=1`
+    // ค้นหารูปภาพที่ระบุสายพันธุ์ตรงกับ ID เท่านั้น
+    const images = await theCatApi(
+      `${API_BASE}/images/search?breed_ids=${encodeURIComponent(breedId)}&limit=5`
     );
 
-    let image = Array.isArray(images)
-      ? images.find((item) => item && item.url) || null
+    // ตรวจสอบว่า API ส่งข้อมูลสายพันธุ์กลับมาตรงกันจริง
+    const image = Array.isArray(images)
+      ? images.find((item) =>
+          item &&
+          item.url &&
+          Array.isArray(item.breeds) &&
+          item.breeds.some((breed) => breed.id === breedId)
+        ) || null
       : null;
-
-    // หากไม่พบรูปเฉพาะสายพันธุ์ ให้ค้นหารูปแมวทั่วไป
-    if (!image) {
-      images = await theCatApi(
-        `${API_BASE}/images/search?limit=1&order=RANDOM`
-      );
-
-      image = Array.isArray(images)
-        ? images.find((item) => item && item.url) || null
-        : null;
-    }
 
     res.json({
       image

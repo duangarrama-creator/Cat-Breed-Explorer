@@ -18,13 +18,24 @@ export async function getBreeds() {
   return data.breeds;
 }
 
-// ดึง URL รูปแมวจากข้อมูลสายพันธุ์โดยตรง
+// ดึงรูปภาพเฉพาะสายพันธุ์ด้วย ID
 export async function getBreedImage(breedId) {
-  const breeds = await getBreeds();
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/breeds/${encodeURIComponent(breedId)}/image`
+    );
 
-  const breed = breeds.find((item) => item.id === breedId);
+    if (!response.ok) {
+      return null;
+    }
 
-  return breed?.image?.url || null;
+    const data = await response.json();
+
+    return data.image?.url || null;
+  } catch (error) {
+    console.error('โหลดรูปสายพันธุ์ไม่สำเร็จ:', breedId, error);
+    return null;
+  }
 }
 
 // ตรวจสอบ Backend
